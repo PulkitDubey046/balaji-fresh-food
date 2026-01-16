@@ -1,150 +1,144 @@
+import React from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import logo from "../assets/logo.png";
-
 import hero1 from "../assets/hero1.jpg";
 import hero2 from "../assets/hero2.jpg";
 import hero3 from "../assets/hero3.jpg";
 
 /* Swiper */
 import { Swiper, SwiperSlide } from "swiper/react";
-import {
-  Autoplay,
-  Pagination,
-  EffectFade,
-  Navigation,
-} from "swiper/modules";
+import { Autoplay, Pagination, EffectFade, Navigation } from "swiper/modules";
 
-/* Swiper styles */
+// IMPORTANT: Import fade effect CSS
 import "swiper/css";
 import "swiper/css/pagination";
-import "swiper/css/effect-fade";
+import "swiper/css/effect-fade"; 
 import "swiper/css/navigation";
 
-const heroImages = [hero1, hero2, hero3];
+const slides = [
+  {
+    image: hero1,
+    title: "Pure & Hygienic",
+    subtitle: "Chana Besan & Sattu",
+    desc: "Manufactured with care using premium raw materials and strict hygiene standards.",
+    accent: "Natural Quality",
+  },
+  {
+    image: hero2,
+    title: "Authentic Taste",
+    subtitle: "Traditional Milling",
+    desc: "Stone-ground methods that preserve nutrition, aroma, and real flavor.",
+    accent: "Traditional",
+  },
+  {
+    image: hero3,
+    title: "Trusted Supply",
+    subtitle: "Retail & Bulk Orders",
+    desc: "Reliable production trusted by homes, shops, and distributors.",
+    accent: "Wholesale",
+  },
+];
 
 export default function Home({ onNavigate }) {
   return (
-    <div className="w-full">
-      {/* HERO */}
-      <section className="relative min-h-[70vh] overflow-hidden">
+    <div className="w-full overflow-hidden bg-white">
+      <section className="relative min-h-screen lg:min-h-[85vh] flex items-center bg-[#fffcf7]">
         <Swiper
           modules={[Autoplay, Pagination, EffectFade, Navigation]}
-          autoplay={{
-            delay: 5000,
-            disableOnInteraction: false,
-          }}
-          loop={true}
+          autoplay={{ delay: 5000, disableOnInteraction: false }}
           effect="fade"
-          pagination={{ clickable: true }}
-          navigation={true}
-          className="min-h-[70vh]"
+          fadeEffect={{ crossFade: true }} // ✅ FIX 1: Ensures slides don't overlap during transition
+          pagination={{ clickable: true, dynamicBullets: true }}
+          navigation
+          loop={true} 
+          className="w-full h-full"
         >
-          {heroImages.map((img, i) => (
-            <SwiperSlide key={i}>
-              <div
-                className="relative min-h-[70vh] flex items-center justify-center text-center"
-                style={{
-                  backgroundImage: `url(${img})`,
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                }}
-              >
-                {/* Overlay */}
-                <div className="absolute inset-0 bg-black/40" />
-
-                <div className="relative z-10 max-w-4xl px-6">
-                  {/* Brand */}
-                  <div className="flex items-center justify-center gap-3 mb-6">
-                    <img
-                      src={logo}
-                      alt="Balaji Fresh Food"
-                      className="w-14 h-14"
-                    />
-                    <span className="text-2xl font-extrabold text-white md:text-3xl">
-                      Balaji Fresh Food
+          {slides.map((s, i) => (
+            <SwiperSlide key={i} className="bg-[#fffcf7]"> 
+              {/* ✅ FIX 2: Added background color to slide to prevent transparency issues */}
+              
+              <div className="grid items-center gap-12 px-6 py-20 mx-auto max-w-7xl lg:grid-cols-2">
+                
+                {/* LEFT CONTENT */}
+                <motion.div
+                  initial={{ opacity: 0, x: -40 }}
+                  whileInView={{ opacity: 1, x: 0 }} // ✅ FIX 3: Triggers animation when slide becomes visible
+                  transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
+                  className="order-2 lg:order-1"
+                >
+                  <div className="inline-flex items-center gap-2 px-4 py-2 mb-6 text-sm font-bold text-orange-600 bg-orange-100 rounded-full">
+                    <span className="relative flex w-3 h-3">
+                      <span className="absolute inline-flex w-full h-full bg-orange-400 rounded-full opacity-75 animate-ping"></span>
+                      <span className="relative inline-flex w-3 h-3 bg-orange-500 rounded-full"></span>
                     </span>
+                    {s.accent}
                   </div>
 
-                  {/* Headline */}
-                  <h1 className="mb-4 text-3xl font-black leading-tight text-white md:text-5xl">
-                    Pure & Hygienic
+                  <h1 className="text-5xl lg:text-7xl font-black text-gray-900 leading-[1.1] mb-4">
+                    {s.title}
                     <br />
-                    Chana Besan and Sattu
+                    <span className="text-orange-500">{s.subtitle}</span>
                   </h1>
 
-                  <p className="mb-8 text-lg text-gray-100 md:text-xl">
-                    Manufactured with care, quality raw materials, and modern
-                    hygienic processes. Trusted by households, retailers, and
-                    distributors.
+                  <p className="max-w-lg mb-8 text-lg leading-relaxed text-gray-600">
+                    {s.desc}
                   </p>
 
-                  {/* CTAs */}
-                  <div className="flex flex-col justify-center gap-4 sm:flex-row">
+                  <div className="flex flex-wrap gap-4">
                     <button
                       onClick={() => onNavigate("services")}
-                      className="px-8 py-4 font-semibold text-white transition bg-red-700 rounded-xl hover:bg-red-800"
+                      className="px-8 py-4 font-bold text-white transition-all duration-300 bg-orange-500 shadow-lg rounded-2xl shadow-orange-200 hover:bg-orange-600 hover:-translate-y-1"
                     >
                       View Products
                     </button>
                     <button
                       onClick={() => onNavigate("contact")}
-                      className="px-8 py-4 font-semibold text-gray-900 transition bg-yellow-400 rounded-xl hover:bg-yellow-300"
+                      className="px-8 py-4 font-bold text-gray-900 transition bg-white border-2 border-gray-100 rounded-2xl hover:bg-gray-50 hover:border-orange-200"
                     >
-                      Contact for Orders
+                      Contact Us
                     </button>
                   </div>
-                </div>
+                </motion.div>
+
+                {/* RIGHT IMAGE */}
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.6, ease: "easeOut", delay: 0.4 }}
+                  className="relative flex justify-center order-1 lg:order-2"
+                >
+                  <div className="absolute inset-0 bg-orange-200 rounded-full blur-3xl opacity-30" />
+
+                  <div className="relative z-10 w-full max-w-[450px] aspect-square overflow-hidden rounded-[40px] shadow-2xl rotate-3 hover:rotate-0 transition-transform duration-500 border-[12px] border-white bg-gray-100">
+                    <img
+                      src={s.image}
+                      alt={s.title}
+                      className="object-cover w-full h-full"
+                    />
+                  </div>
+
+                  {/* Floating badge */}
+                  <motion.div
+                    animate={{ y: [0, -10, 0] }}
+                    transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
+                    className="absolute z-20 hidden p-4 bg-white shadow-xl -top-6 -right-6 rounded-2xl md:block"
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="flex items-center justify-center w-10 h-10 text-xl bg-green-100 rounded-full">
+                        🌱
+                      </div>
+                      <div>
+                        <p className="text-xs font-bold text-gray-400 uppercase">Quality</p>
+                        <p className="text-sm font-black text-gray-900">100% Organic</p>
+                      </div>
+                    </div>
+                  </motion.div>
+                </motion.div>
+
               </div>
             </SwiperSlide>
           ))}
         </Swiper>
-      </section>
-
-      {/* WHY BALAJI */}
-      <section className="max-w-6xl px-6 py-16 mx-auto text-center">
-        <h2 className="mb-10 text-3xl font-black text-red-700 md:text-4xl">
-          Why Choose Balaji Fresh Food
-        </h2>
-
-        <div className="grid gap-8 md:grid-cols-3">
-          {[
-            {
-              title: "Pure Ingredients",
-              text: "Carefully selected raw materials to ensure natural taste and nutrition.",
-            },
-            {
-              title: "Hygienic Processing",
-              text: "Manufactured using clean, modern processes under strict quality control.",
-            },
-            {
-              title: "Trusted Supply",
-              text: "Reliable production suitable for households, retailers, and bulk buyers.",
-            },
-          ].map((item, i) => (
-            <div
-              key={i}
-              className="p-8 bg-white border-t-4 border-red-600 shadow-md rounded-2xl"
-            >
-              <h3 className="mb-3 text-xl font-bold">{item.title}</h3>
-              <p className="text-gray-700">{item.text}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* CTA STRIP */}
-      <section className="py-12 text-center bg-yellow-400">
-        <h3 className="mb-4 text-2xl font-bold md:text-3xl">
-          Looking for Quality Besan & Sattu?
-        </h3>
-        <p className="mb-6 text-gray-800">
-          Contact us today for bulk orders, distribution, or inquiries.
-        </p>
-        <button
-          onClick={() => onNavigate("contact")}
-          className="px-10 py-4 font-semibold text-white transition bg-red-700 rounded-xl hover:bg-red-800"
-        >
-          Get in Touch
-        </button>
       </section>
     </div>
   );
