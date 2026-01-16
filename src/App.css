@@ -1,0 +1,55 @@
+/* Reset & global */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background: #fafafa;
+  color: #333;
+}
+
+/* Gradient Brand Color */
+:root {
+  --brand: linear-gradient(45deg, #ff007b, #ff8a00);
+  --brand-solid: #ff007b;
+}
+
+/* Content spacing */
+.content {
+  padding: 40px 20px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* Section Headings */
+.section-title {
+  text-align: center;
+  font-size: 2.4rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  background: var(--brand);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.section-subtitle {
+  text-align: center;
+  font-size: 1.1rem;
+  color: #555;
+  margin-bottom: 40px;
+}
+
+/* Make sure body doesn't add extra margin */
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* Every page starts below sticky header */
+.page,
+.home {
+  padding-top: 90px; /* a bit more than header height */
+}
