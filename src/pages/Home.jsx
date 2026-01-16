@@ -12,7 +12,7 @@ import { Autoplay, Pagination, EffectFade, Navigation } from "swiper/modules";
 // IMPORTANT: Import fade effect CSS
 import "swiper/css";
 import "swiper/css/pagination";
-import "swiper/css/effect-fade"; 
+import "swiper/css/effect-fade";
 import "swiper/css/navigation";
 
 const slides = [
@@ -47,29 +47,26 @@ export default function Home({ onNavigate }) {
           modules={[Autoplay, Pagination, EffectFade, Navigation]}
           autoplay={{ delay: 5000, disableOnInteraction: false }}
           effect="fade"
-          fadeEffect={{ crossFade: true }} // ✅ FIX 1: Ensures slides don't overlap during transition
+          fadeEffect={{ crossFade: true }}
           pagination={{ clickable: true, dynamicBullets: true }}
           navigation
-          loop={true} 
+          loop={true}
           className="w-full h-full"
         >
           {slides.map((s, i) => (
-            <SwiperSlide key={i} className="bg-[#fffcf7]"> 
-              {/* ✅ FIX 2: Added background color to slide to prevent transparency issues */}
-              
+            <SwiperSlide key={i} className="bg-[#fffcf7]">
               <div className="grid items-center gap-12 px-6 py-20 mx-auto max-w-7xl lg:grid-cols-2">
-                
                 {/* LEFT CONTENT */}
                 <motion.div
                   initial={{ opacity: 0, x: -40 }}
-                  whileInView={{ opacity: 1, x: 0 }} // ✅ FIX 3: Triggers animation when slide becomes visible
+                  whileInView={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
                   className="order-2 lg:order-1"
                 >
-                  <div className="inline-flex items-center gap-2 px-4 py-2 mb-6 text-sm font-bold text-orange-600 bg-orange-100 rounded-full">
+                  <div className="inline-flex items-center gap-2 px-4 py-2 mb-6 text-sm font-bold text-green-700 bg-green-100 rounded-full">
                     <span className="relative flex w-3 h-3">
-                      <span className="absolute inline-flex w-full h-full bg-orange-400 rounded-full opacity-75 animate-ping"></span>
-                      <span className="relative inline-flex w-3 h-3 bg-orange-500 rounded-full"></span>
+                      <span className="absolute inline-flex w-full h-full bg-green-400 rounded-full opacity-75 animate-ping"></span>
+                      <span className="relative inline-flex w-3 h-3 bg-green-500 rounded-full"></span>
                     </span>
                     {s.accent}
                   </div>
@@ -120,7 +117,11 @@ export default function Home({ onNavigate }) {
                   {/* Floating badge */}
                   <motion.div
                     animate={{ y: [0, -10, 0] }}
-                    transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
+                    transition={{
+                      repeat: Infinity,
+                      duration: 4,
+                      ease: "easeInOut",
+                    }}
                     className="absolute z-20 hidden p-4 bg-white shadow-xl -top-6 -right-6 rounded-2xl md:block"
                   >
                     <div className="flex items-center gap-3">
@@ -128,13 +129,16 @@ export default function Home({ onNavigate }) {
                         🌱
                       </div>
                       <div>
-                        <p className="text-xs font-bold text-gray-400 uppercase">Quality</p>
-                        <p className="text-sm font-black text-gray-900">100% Organic</p>
+                        <p className="text-xs font-bold text-gray-400 uppercase">
+                          Quality
+                        </p>
+                        <p className="text-sm font-black text-gray-900">
+                          100% Organic
+                        </p>
                       </div>
                     </div>
                   </motion.div>
                 </motion.div>
-
               </div>
             </SwiperSlide>
           ))}
