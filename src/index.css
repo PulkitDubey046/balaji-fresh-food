@@ -1,3 +1,4 @@
+/* index.css */
 @import "tailwindcss";
 
 html { 
@@ -5,32 +6,31 @@ html {
   scroll-padding-top: 72px; 
 }
 
-html,
-body {
-  max-width: 100%;
-  overflow-x: hidden;
-}
-
-.page { 
-  padding-top: 72px; 
-}
-
-.gradient-text {
-  background: linear-gradient(45deg, #ff007b, #ff8a00);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-/* Swiper arrow styling */
+/* Restored Original Style with Orange Color */
 .swiper-button-next,
 .swiper-button-prev {
-  color: #ff8a00; /* Matching your orange theme */
+  /* Using a vibrant orange to match your brand */
+  color: #ff8a00 !important; 
+  transition: transform 0.2s ease;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  transform: scale(1.2);
 }
 
 .swiper-button-next::after,
 .swiper-button-prev::after {
-  font-size: 24px;
+  font-size: 28px; 
   font-weight: bold;
+}
+
+.swiper-button-next {
+  right: 15px;
+}
+
+.swiper-button-prev {
+  left: 15px;
 }
 
 /* Fix for Mobile Desktop Mode */
@@ -40,24 +40,9 @@ body {
     display: flex !important;
     flex-direction: column !important;
     text-align: center !important;
-    padding-top: 2rem !important;
-    padding-bottom: 5rem !important;
   }
-
-  .force-mobile .order-1 {
-    order: 1 !important;
-    margin-bottom: 2rem;
-  }
-
-  .force-mobile .order-2 {
-    order: 2 !important;
-  }
-
-  .force-mobile .flex-wrap {
-    justify-content: center;
-  }
-
-  /* Hide arrows on touch screens even in desktop mode */
+  
+  /* Hide arrows on touch devices (including Desktop Mode on mobile) */
   .swiper-button-next,
   .swiper-button-prev {
     display: none !important;

@@ -11,7 +11,7 @@ function App() {
     const section = document.getElementById(sectionId);
     if (!section) return;
 
-    const headerOffset = header ? header.offsetHeight : 72;
+    const headerOffset = 72;
     const offset =
       section.getBoundingClientRect().top +
       window.pageYOffset -

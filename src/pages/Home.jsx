@@ -49,9 +49,9 @@ export default function Home({ onNavigate }) {
           autoplay={{ delay: 5000, disableOnInteraction: false }}
           effect="fade"
           fadeEffect={{ crossFade: true }}
-          pagination={{ clickable: true, dynamicBullets: true }}
-          // Only show navigation arrows on actual desktops with mice
-          navigation={!isTouch && window.innerWidth > 1024}
+          pagination={{ clickable: true }}
+          // Navigation enabled but styled in index.css
+          navigation={true}
           loop={true}
           className="w-full h-full"
         >
