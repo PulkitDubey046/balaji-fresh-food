@@ -34,3 +34,10 @@ body {
 .swiper-button-next {
   right: 10px;
 }
+
+/* Treat mobile desktop-mode like mobile */
+@media (hover: none) and (pointer: coarse) {
+  .force-mobile {
+    grid-template-columns: 1fr !important;
+  }
+}

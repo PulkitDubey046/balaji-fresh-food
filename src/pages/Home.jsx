@@ -55,7 +55,7 @@ export default function Home({ onNavigate }) {
         >
           {slides.map((s, i) => (
             <SwiperSlide key={i} className="bg-[#fffcf7]">
-              <div className="grid items-center gap-12 px-6 py-20 mx-auto max-w-7xl lg:grid-cols-2">
+              <div className="grid items-center grid-cols-1 gap-12 px-6 py-20 mx-auto max-w-7xl lg:grid-cols-2 force-mobile">
                 {/* LEFT CONTENT */}
                 <motion.div
                   initial={{ opacity: 0, x: -40 }}
