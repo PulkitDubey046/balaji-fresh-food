@@ -5,14 +5,12 @@ export default function Services() {
   const products = [
     {
       title: "Chana Besan",
-      description:
-        "Finely milled chana besan made from high-quality chickpeas, ideal for cooking and food preparation.",
+      description: "Finely milled chana besan made from high-quality chickpeas, ideal for cooking and food preparation.",
       image: besan,
     },
     {
       title: "Sattu",
-      description:
-        "Nutritious roasted gram flour, rich in protein and fiber, processed hygienically for freshness.",
+      description: "Nutritious roasted gram flour, rich in protein and fiber, processed hygienically for freshness.",
       image: sattu,
     },
   ];
@@ -23,13 +21,12 @@ export default function Services() {
         Our Products
       </h2>
 
-      <div className="grid gap-8 md:grid-cols-2">
+      <div className="grid gap-8 md:grid-cols-2 force-mobile">
         {products.map((p, i) => (
           <div
             key={i}
-            className="flex flex-col gap-6 p-8 bg-white border-l-4 border-red-600 shadow-md md:flex-row rounded-2xl"
+            className="flex flex-col items-center gap-6 p-8 bg-white border-l-4 border-red-600 shadow-md md:flex-row rounded-2xl md:items-start"
           >
-            {/* Product Image */}
             <div className="flex-shrink-0">
               <img
                 src={p.image}
@@ -38,8 +35,7 @@ export default function Services() {
               />
             </div>
 
-            {/* Product Content */}
-            <div>
+            <div className="text-center md:text-left">
               <h3 className="mb-3 text-2xl font-bold">{p.title}</h3>
               <p className="leading-relaxed text-gray-700">
                 {p.description}

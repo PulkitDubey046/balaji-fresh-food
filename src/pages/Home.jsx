@@ -1,15 +1,14 @@
 import React from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import logo from "../assets/logo.png";
+import { motion } from "framer-motion";
 import hero1 from "../assets/hero1.jpg";
 import hero2 from "../assets/hero2.jpg";
 import hero3 from "../assets/hero3.jpg";
+import { useIsTouchDevice } from "../hooks/useTouchDetection";
 
 /* Swiper */
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, EffectFade, Navigation } from "swiper/modules";
 
-// IMPORTANT: Import fade effect CSS
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/effect-fade";
@@ -40,6 +39,8 @@ const slides = [
 ];
 
 export default function Home({ onNavigate }) {
+  const isTouch = useIsTouchDevice();
+
   return (
     <div className="w-full overflow-hidden bg-white">
       <section className="relative min-h-screen lg:min-h-[85vh] flex items-center bg-[#fffcf7]">
@@ -49,7 +50,8 @@ export default function Home({ onNavigate }) {
           effect="fade"
           fadeEffect={{ crossFade: true }}
           pagination={{ clickable: true, dynamicBullets: true }}
-          navigation={window.innerWidth > 1024}
+          // Only show navigation arrows on actual desktops with mice
+          navigation={!isTouch && window.innerWidth > 1024}
           loop={true}
           className="w-full h-full"
         >
@@ -113,31 +115,6 @@ export default function Home({ onNavigate }) {
                       className="object-cover w-full h-full"
                     />
                   </div>
-
-                  {/* Floating badge */}
-                  <motion.div
-                    animate={{ y: [0, -10, 0] }}
-                    transition={{
-                      repeat: Infinity,
-                      duration: 4,
-                      ease: "easeInOut",
-                    }}
-                    className="absolute z-20 hidden p-4 bg-white shadow-xl -top-6 -right-6 rounded-2xl md:block"
-                  >
-                    <div className="flex items-center gap-3">
-                      <div className="flex items-center justify-center w-10 h-10 text-xl bg-green-100 rounded-full">
-                        🌱
-                      </div>
-                      <div>
-                        <p className="text-xs font-bold text-gray-400 uppercase">
-                          Quality
-                        </p>
-                        <p className="text-sm font-black text-gray-900">
-                          100% Organic
-                        </p>
-                      </div>
-                    </div>
-                  </motion.div>
                 </motion.div>
               </div>
             </SwiperSlide>
