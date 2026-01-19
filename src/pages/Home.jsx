@@ -49,7 +49,7 @@ export default function Home({ onNavigate }) {
           effect="fade"
           fadeEffect={{ crossFade: true }}
           pagination={{ clickable: true, dynamicBullets: true }}
-          navigation
+          navigation={window.innerWidth > 1024}
           loop={true}
           className="w-full h-full"
         >
@@ -71,26 +71,26 @@ export default function Home({ onNavigate }) {
                     {s.accent}
                   </div>
 
-                  <h1 className="text-5xl lg:text-7xl font-black text-gray-900 leading-[1.1] mb-4">
+                  <h1 className="text-[clamp(2.4rem,5vw,4.5rem)] font-black text-gray-900 leading-[1.1] mb-4">
                     {s.title}
                     <br />
                     <span className="text-orange-500">{s.subtitle}</span>
                   </h1>
 
-                  <p className="max-w-lg mb-8 text-lg leading-relaxed text-gray-600">
+                  <p className="max-w-lg mb-8 text-[clamp(1rem,2.2vw,1.125rem)] leading-relaxed text-gray-600">
                     {s.desc}
                   </p>
 
                   <div className="flex flex-wrap gap-4">
                     <button
                       onClick={() => onNavigate("services")}
-                      className="px-8 py-4 font-bold text-white transition-all duration-300 bg-orange-500 shadow-lg rounded-2xl shadow-orange-200 hover:bg-orange-600 hover:-translate-y-1"
+                      className="px-8 py-4 font-bold text-[clamp(0.95rem,2vw,1rem)] text-white transition-all duration-300 bg-orange-500 shadow-lg rounded-2xl shadow-orange-200 hover:bg-orange-600 hover:-translate-y-1"
                     >
                       View Products
                     </button>
                     <button
                       onClick={() => onNavigate("contact")}
-                      className="px-8 py-4 font-bold text-gray-900 transition bg-white border-2 border-gray-100 rounded-2xl hover:bg-gray-50 hover:border-orange-200"
+                      className="px-8 py-4 font-bold text-[clamp(0.95rem,2vw,1rem)] text-gray-900 transition bg-white border-2 border-gray-100 rounded-2xl hover:bg-gray-50 hover:border-orange-200"
                     >
                       Contact Us
                     </button>

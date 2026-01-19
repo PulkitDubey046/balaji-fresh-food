@@ -5,6 +5,12 @@ html {
   scroll-padding-top: 72px; 
 }
 
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 .page { 
   padding-top: 72px; 
 }
