@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
-import besan from "../assets/besan.png";
-import sattu from "../assets/sattu.png";
+import besan from "../assets/besan_img.png";
+import sattu from "../assets/Sattu_img.png";
 
 export default function Services() {
   const products = [
