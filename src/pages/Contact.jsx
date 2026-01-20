@@ -20,14 +20,14 @@ export default function Contact() {
 
     emailjs
       .send(
-        "service_2kxswlt",     // keep your service ID
-        "template_o28qwg9",    // keep your template ID
+        "service_2kxswlt",     
+        "template_soc41kl",    
         {
           name: form.name,
           email: form.email,
           message: form.message,
         },
-        "ON-GsxYv5L4JlMCQQ"    // keep your public key
+        "ON-GsxYv5L4JlMCQQ"    
       )
       .then(
         () => {
