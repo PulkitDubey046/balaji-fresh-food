@@ -21,7 +21,7 @@ export default function Contact() {
     emailjs
       .send(
         "service_2kxswlt",     
-        "template_soc41kl",    
+        "template_soc41ki",    
         {
           name: form.name,
           email: form.email,
