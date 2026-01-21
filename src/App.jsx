@@ -1,5 +1,6 @@
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import FloatingActions from "./components/FloatingActions";
 
 import Home from "./pages/Home";
 import About from "./pages/About";
@@ -27,6 +28,8 @@ function App() {
     <div className="min-h-screen font-sans text-gray-800 bg-yellow-50">
       <Header navigate={navigate} />
 
+      <FloatingActions />
+      
       <div className="px-4 pt-20 mx-auto md:px-8 max-w-7xl">
         <section id="home">
           <Home onNavigate={navigate} />
