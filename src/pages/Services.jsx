@@ -8,8 +8,8 @@ import "swiper/css";
 import "swiper/css/pagination";
 
 // Assets
-import besan from "../assets/besan1.jpg";
-import sattu from "../assets/Sattu1.jpg";
+import besan from "../assets/bsean10.jpg";
+import sattu from "../assets/besan11.jpg";
 import product1 from "../assets/balaji1.jpg";
 import product2 from "../assets/balaji2.jpg";
 import product3 from "../assets/balaji3.jpg";
@@ -101,7 +101,7 @@ export default function Services() {
 
       {/* Text Area */}
       <div className="flex flex-col flex-grow p-8">
-        <h3 className="mb-3 text-2xl font-black text-gray-900 leading-tight">
+        <h3 className="mb-3 text-2xl font-black leading-tight text-gray-900">
           {p.title}
         </h3>
         <p className="flex-grow mb-6 text-sm leading-relaxed text-gray-600">
@@ -124,7 +124,7 @@ export default function Services() {
   );
 
   return (
-    <main className="px-5 py-20 mx-auto max-w-7xl overflow-hidden" id="services">
+    <main className="px-5 py-20 mx-auto overflow-hidden max-w-7xl" id="services">
       {/* Section Title */}
       <div className="mb-16 text-center">
         <motion.span 
@@ -145,7 +145,7 @@ export default function Services() {
       </div>
 
       {/* --- DESKTOP VIEW: Grid --- */}
-      <div className="hidden md:grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+      <div className="hidden gap-8 md:grid md:grid-cols-2 lg:grid-cols-3">
         {products.map((p, i) => (
           <ProductCard key={i} p={p} i={i} isMobile={false} />
         ))}
