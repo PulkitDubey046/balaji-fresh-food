@@ -9,9 +9,11 @@ export default function Header({ navigate }) {
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
 
+  // Scroll effects + Section detection
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
+
       const sections = ["home", "about", "services", "contact"];
       const headerOffset = 72;
       const viewportCenter = window.scrollY + headerOffset + 1;
@@ -52,73 +54,90 @@ export default function Header({ navigate }) {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? "bg-yellow-400 shadow-lg" : "bg-white"
+        scrolled 
+          ? "bg-yellow-400/95 backdrop-blur-md shadow-lg" 
+          : "bg-white shadow-md"
       }`}
       style={{ height: "72px" }}
     >
       <div className="flex items-center justify-between h-full px-4 mx-auto max-w-7xl md:px-8">
+        
         {/* Brand Logo & Text */}
         <div
           onClick={() => handleNav("home")}
-          className="flex items-center gap-3 cursor-pointer shrink-0"
+          className="flex items-center gap-3 cursor-pointer shrink-0 group"
         >
           <img
             src={logo}
             alt="Balaji Fresh Food"
-            className="w-10 h-auto md:w-12"
+            className="w-10 h-auto transition-transform duration-300 md:w-12 group-hover:scale-110"
           />
-          <span className="text-lg font-extrabold tracking-wide text-red-700">
+          <span className="text-lg font-extrabold tracking-wide text-red-700 md:text-xl">
             Balaji Fresh Food
           </span>
         </div>
 
-        {/* Govt Logos - Hidden on mobile, spaced nicely on desktop */}
+        {/* Govt Logos - Hidden on mobile */}
         <div className="items-center hidden gap-4 mx-4 md:flex">
-          <img src={gov1} alt="Made in India" className="w-auto h-8 lg:h-10" />
-          <img src={gov2} alt="LBIADA" className="w-auto h-8 lg:h-10" />
-          <img src={gov3} alt="Bihar-gov" className="w-auto h-8 lg:h-10" />
+          <img src={gov1} alt="Made in India" className="w-auto h-8 transition-opacity lg:h-10 hover:opacity-100 opacity-90" />
+          <img src={gov2} alt="LBIADA" className="w-auto h-8 transition-opacity lg:h-10 hover:opacity-100 opacity-90" />
+          <img src={gov3} alt="Bihar-gov" className="w-auto h-8 transition-opacity lg:h-10 hover:opacity-100 opacity-90" />
         </div>
 
-        {/* Right Side: Desktop Nav + Mobile Toggle */}
-        <div className="flex items-center gap-2">
-          {/* Desktop Nav */}
-          <nav className="items-center hidden gap-1 md:flex">
-            {navItems.map(({ label, section }) => (
-              <button
-                key={section}
-                onClick={() => handleNav(section)}
-                className={`px-4 py-2 rounded-full font-semibold transition-all duration-200 ${
-                  activeSection === section
-                    ? "bg-yellow-300 text-red-700 shadow-md"
-                    : scrolled
-                      ? "text-red-700 hover:bg-yellow-200"
-                      : "text-gray-800 hover:bg-yellow-100"
-                }`}
-              >
-                {label}
-              </button>
-            ))}
-          </nav>
+        {/* Desktop Nav */}
+        <nav className="items-center hidden gap-2 md:flex">
+          {navItems.map(({ label, section }) => (
+            <button
+              key={section}
+              onClick={() => handleNav(section)}
+              className={`relative px-5 py-2 rounded-full font-bold transition-all duration-300 ${
+                activeSection === section
+                  ? "bg-red-700 text-white shadow-lg scale-105"
+                  : scrolled
+                  ? "text-red-800 hover:bg-yellow-300"
+                  : "text-gray-800 hover:bg-yellow-100"
+              }`}
+            >
+              {label}
+              {activeSection === section && (
+                <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 bg-red-700 rounded-full animate-pulse" />
+              )}
+            </button>
+          ))}
+        </nav>
 
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setOpen(!open)}
-            className="p-2 bg-yellow-200 rounded-lg md:hidden"
-            aria-label="Toggle menu"
-          >
-            <div className="flex flex-col justify-between w-6 h-5">
-              <span className="block h-0.5 bg-red-700 rounded"></span>
-              <span className="block h-0.5 bg-red-700 rounded"></span>
-              <span className="block h-0.5 bg-red-700 rounded"></span>
-            </div>
-          </button>
-        </div>
+        {/* Mobile "Cut" Toggle Button */}
+        <button
+          onClick={() => setOpen(!open)}
+          className={`md:hidden p-2 rounded-xl transition-all duration-300 ${
+            scrolled ? "bg-yellow-500" : "bg-yellow-100"
+          }`}
+          aria-label="Toggle menu"
+        >
+          <div className="relative w-6 h-5">
+            <span
+              className={`absolute block h-0.5 w-full bg-red-700 rounded-full transition-all duration-300 transform ${
+                open ? "rotate-45 translate-y-2" : "translate-y-0"
+              }`}
+            ></span>
+            <span
+              className={`absolute block h-0.5 w-full bg-red-700 rounded-full transition-all duration-300 top-2 ${
+                open ? "opacity-0 scale-0" : "opacity-100"
+              }`}
+            ></span>
+            <span
+              className={`absolute block h-0.5 w-full bg-red-700 rounded-full transition-all duration-300 transform ${
+                open ? "-rotate-45 translate-y-2" : "translate-y-4"
+              }`}
+            ></span>
+          </div>
+        </button>
       </div>
 
       {/* Mobile Nav Dropdown */}
       {open && (
-        <div className="bg-yellow-300 shadow-xl md:hidden">
-          <div className="flex flex-col gap-2 px-4 py-4">
+        <div className="absolute left-0 right-0 top-[72px] bg-yellow-400 shadow-2xl md:hidden border-t border-yellow-500/50 animate-in fade-in slide-in-from-top-4">
+          <div className="flex flex-col gap-2 px-4 py-6">
             {navItems.map(({ label, section }) => (
               <button
                 key={section}
@@ -126,20 +145,24 @@ export default function Header({ navigate }) {
                   handleNav(section);
                   setOpen(false);
                 }}
-                className={`text-left px-5 py-3 rounded-xl font-semibold transition-all ${
+                className={`flex items-center gap-3 text-left px-6 py-4 rounded-2xl font-bold transition-all ${
                   activeSection === section
-                    ? "bg-yellow-400 text-red-700 shadow-md"
-                    : "text-gray-800 hover:bg-yellow-200"
+                    ? "bg-red-700 text-white shadow-xl translate-x-2"
+                    : "text-red-900 hover:bg-yellow-300"
                 }`}
               >
+                {activeSection === section && (
+                   <div className="w-2 h-2 bg-white rounded-full animate-ping" />
+                )}
                 {label}
               </button>
             ))}
-            {/* Optional: Add small govt logos inside mobile menu if you want them visible there */}
-            <div className="flex justify-around pt-4 mt-2 border-t border-yellow-400">
-              <img src={gov1} alt="Gov 1" className="w-auto h-8 opacity-80" />
-              <img src={gov2} alt="Gov 2" className="w-auto h-8 opacity-80" />
-              <img src={gov3} alt="Gov 3" className="w-auto h-8 opacity-80" />
+            
+            {/* Govt Logos inside mobile menu */}
+            <div className="flex justify-around pt-6 mt-4 border-t border-red-700/20">
+              <img src={gov1} alt="Gov 1" className="w-auto h-8" />
+              <img src={gov2} alt="Gov 2" className="w-auto h-8" />
+              <img src={gov3} alt="Gov 3" className="w-auto h-8" />
             </div>
           </div>
         </div>

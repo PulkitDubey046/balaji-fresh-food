@@ -109,7 +109,20 @@ export default function Footer() {
 
       {/* Bottom strip */}
       <div className="py-4 text-xs text-center text-gray-800 border-t border-red-300">
-        © {new Date().getFullYear()} Balaji Fresh Food · A unit of Balaji Traders
+        <p>
+          © {new Date().getFullYear()} Balaji Fresh Food · A unit of Balaji Traders
+        </p>
+        <p className="mt-1">
+          Developed by{' '}
+          <a 
+            href="https://pulkitdubey.netlify.app/" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="font-semibold text-red-700 hover:underline"
+          >
+            Pulkit Dubey
+          </a>
+        </p>
       </div>
     </footer>
   )
