@@ -25,6 +25,7 @@ export default function Contact() {
         {
           name: form.name,
           email: form.email,
+          reply_to: form.email,
           message: form.message,
         },
         "ON-GsxYv5L4JlMCQQ"    
