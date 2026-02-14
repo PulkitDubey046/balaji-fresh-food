@@ -8,8 +8,8 @@ import "swiper/css";
 import "swiper/css/pagination";
 
 // Assets
-import besan from "../assets/besan_img.png";
-import sattu from "../assets/Sattu_img.png";
+import besan from "../assets/besan1.jpg";
+import sattu from "../assets/Sattu1.jpg";
 import product1 from "../assets/balaji1.jpg";
 import product2 from "../assets/balaji2.jpg";
 import product3 from "../assets/balaji3.jpg";
